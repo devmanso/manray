@@ -19,8 +19,13 @@ static int lua_drawtext(lua_State *L) {
     float x = luaL_checknumber(L, 2);
     float y = luaL_checknumber(L, 3);
     int fontsize = luaL_checkinteger(L, 4);
-    unsigned int colorValue = luaL_checkinteger(L, 5);
-    Color color = ColorFromHSV((float)colorValue, 1.0f, 1.0f);
+    float hue = luaL_checknumber(L, 5);
+    float saturation = luaL_checknumber(L, 6);
+    float value = luaL_checknumber(L, 7);
+    Color color = ColorFromHSV(
+    hue, 
+    saturation, 
+    value);
 
     DrawText(text, x, y, fontsize, color);
 
@@ -32,15 +37,25 @@ static int lua_drawrect(lua_State *L) {
     float ypos = luaL_checknumber(L, 2);
     float width = luaL_checknumber(L, 3);
     float height = luaL_checknumber(L, 4);
-    unsigned int colorValue = luaL_checkinteger(L, 5);
-    Color color = ColorFromHSV((float)colorValue, 1.0f, 1.0f);
+    float hue = luaL_checknumber(L, 5);
+    float saturation = luaL_checknumber(L, 6);
+    float value = luaL_checknumber(L, 7);
+    Color color = ColorFromHSV(
+    hue, 
+    saturation, 
+    value);
     DrawRectangle(xpos, ypos, width, height, color);
     return 0;
 }
 
 static int lua_clearbackground(lua_State *L) {
-    unsigned int colorValue = luaL_checkinteger(L, 1);
-    Color color = ColorFromHSV((float)colorValue, 1.0f, 1.0f);
+    float hue = luaL_checknumber(L, 1);
+    float saturation = luaL_checknumber(L, 2);
+    float value = luaL_checknumber(L, 3);
+    Color color = ColorFromHSV(
+    hue, 
+    saturation, 
+    value);
     ClearBackground(color);
     return 0;
 }
@@ -114,7 +129,7 @@ void registerBindings(lua_State *L) {
 */
 int doScript(const char filepath[], lua_State *L) {
     if(luaL_dofile(L, filepath) !=0 ) {
-            printf("could not find or load script!");
+            printf("could not find or load script! \n");
             printf("error: %s\n", lua_tostring(L, -1));
             lua_pop(L, 1);
             return 1;

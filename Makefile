@@ -1,2 +1,2 @@
 game:
-	clang -framework CoreVideo -framework IOKit -framework Cocoa -framework GLUT -framework OpenGL lib/libraylib.a lib/liblua.a src/main.c -o main
+	clang -std=c99 -I./include -L./lib -framework CoreVideo -framework IOKit -framework Cocoa -framework GLUT -framework OpenGL -framework CoreServices lib/libraylib.a lib/liblua.a -llua -lraylib src/main.c -o main
