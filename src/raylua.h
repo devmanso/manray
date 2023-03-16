@@ -9,6 +9,15 @@
 
 // binding C functions to Lua
 
+int lua_iskeydown(lua_State *L) {
+    const char *keyName = lua_tostring(L, 1);
+    
+    int isKeyDown = IsKeyDown(GetKeyFromName(keyName));
+    lua_pushnumber(L, isKeyDown);
+    
+    return 1;
+}
+
 static int lua_getfps(lua_State *L) {
     lua_pushnumber(L, GetFPS());
     return 1;
@@ -110,6 +119,7 @@ void registerBindings(lua_State *L) {
     luaL_openlibs(L);
     // push c functions to Lua, and register them globally
     lua_register(L, "init", lua_initwindow);
+    lua_register(L, "IsKeyDown", lua_iskeydown);
     lua_register(L, "begin", lua_begindrawing);
     lua_register(L, "stop", lua_enddrawing);
     lua_register(L, "DrawText", lua_drawtext);
