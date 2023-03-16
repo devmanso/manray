@@ -57,4 +57,6 @@ Now that you have created the app bundle directories, you will need to move your
 </plist>
 ```
 
-you can modify the plist to your liking, as it doesn't change how the application runs, if you have an icon for your app, put the .icns image into Resources and call it in the plist
+you can modify the plist to your liking, as it doesn't change how the application runs, if you have an icon for your app, put the .icns image into Resources and call it in the plist.
+
+After you've done all that, your app is now complete! To run the app, double click the app icon.

@@ -9,6 +9,11 @@
 
 // binding C functions to Lua
 
+static int lua_getfps(lua_State *L) {
+    lua_pushnumber(L, GetFPS());
+    return 1;
+}
+
 static int lua_deltaTime(lua_State *L) {
     lua_pushnumber(L, GetFrameTime());
     return 1; // args to lua stack
@@ -114,6 +119,7 @@ void registerBindings(lua_State *L) {
     lua_register(L, "DeltaTime", lua_deltaTime);
     lua_register(L, "WinShouldClose", lua_windowshouldclose);
     lua_register(L, "exit", lua_closewindow);
+    lua_register(L, "getfps", lua_getfps);
 }
 
 /**
