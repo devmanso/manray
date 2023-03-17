@@ -10,13 +10,11 @@
 // binding C functions to Lua
 
 int lua_iskeydown(lua_State *L) {
-    const char *keyName = lua_tostring(L, 1);
-    
-    int isKeyDown = IsKeyDown(GetKeyFromName(keyName));
-    lua_pushnumber(L, isKeyDown);
-    
+    int key = luaL_checkinteger(L, 1);
+    bool result = IsKeyDown(key);
+    lua_pushboolean(L, result);
     return 1;
-}
+ }
 
 static int lua_getfps(lua_State *L) {
     lua_pushnumber(L, GetFPS());
