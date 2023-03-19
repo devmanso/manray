@@ -9,6 +9,35 @@
 
 // binding C functions to Lua
 
+static int lua_ismousebuttonpressed(lua_State *L) {
+    int mouseButton = luaL_checknumber(L, 1);
+    lua_pushnumber(L, IsMouseButtonDown(mouseButton));
+    return 1;
+}
+
+static int lua_getmouseposition(lua_State *L) {
+    // using lua_pushnumber to push GetMousePosition will cause an error because Vector2
+    // is incompatible with the type lua_Number, instead, we will create a table
+    // and store the x and y position on that table.
+
+    Vector2 mousePosition = GetMousePosition();
+
+    // create lua table to hold x and y position
+    lua_newtable(L);
+
+    // set x field to get x position of mouse
+    lua_pushstring(L, "x");
+    lua_pushnumber(L, mousePosition.x);
+    lua_settable(L, -3);
+
+    // set y field to get y position of mouse
+    lua_pushstring(L, "y");
+    lua_pushnumber(L, mousePosition.y);
+    lua_settable(L, -3);
+
+    return 1;
+}
+
 static int lua_loadtexture(lua_State *L) {
     const char *filename = luaL_checkstring(L, 1);
     Texture2D *texture = malloc(sizeof(Texture2D));
@@ -23,7 +52,7 @@ static int lua_drawtexture(lua_State *L) {
     float yPosition = luaL_checknumber(L, 3);
     
     //TODO: let lua scripter determine the tint of the texture
-    
+
     DrawTexture(*texture, xPosition, yPosition, WHITE);
     return 0;
 }
@@ -149,6 +178,7 @@ void registerBindings(lua_State *L) {
     lua_register(L, "getfps", lua_getfps);
     lua_register(L, "LoadImage", lua_loadtexture);
     lua_register(L, "DrawImage", lua_drawtexture);
+    lua_register(L, "GetMousePos", lua_getmouseposition);
 }
 
 /**

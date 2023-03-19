@@ -1,2 +1,2 @@
-game:
-	clang -std=c99 -I./include -L./lib -framework CoreVideo -framework IOKit -framework Cocoa -framework GLUT -framework OpenGL -framework CoreServices lib/libraylib.a lib/liblua.a -llua -lraylib src/main.c -o main
+manray:
+	clang -std=c99 -I./include -L./lib -framework CoreVideo -framework IOKit -framework Cocoa -framework GLUT -framework OpenGL -framework CoreServices lib/libraylib.a lib/liblua.a -llua -lraylib src/main.c -o manray

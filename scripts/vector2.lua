@@ -50,6 +50,16 @@ function vector2.new(x, y)
   return vector2_mt.__call(vector2_mt, x, y)
 end
 
+function vector2.normalize(vec2)
+  local len = math.sqrt(vec2.x * vec2.x + vec2.y * vec2.y)
+  if len ~= 0 then
+    return vector2.new(vec2.x / len, vec2.y / len)
+  else
+    return vector2.zero
+  end
+end
+
+
 -- Define vector2 consts
 vector2.zero = vector2.new(0, 0)
 vector2.up = vector2.new(0, -1)

@@ -1,7 +1,9 @@
-init(850, 450, "test")
+init(850, 450, "my title")
+
+--collectgarbage('stop')
 
 vec2 = require("scripts/vector2")
-kb = require("scripts/keyboard")
+kb = require("scripts/input")
 
 
 pos1 = vec2.new(10, 40)
@@ -64,7 +66,6 @@ function glitchyRectangle()
 end
 
 function displayInfo()
-    DrawImage(sprite, 200, 100)
     -- display memory usage
     memory = tostring(math.floor(collectgarbage('count') ) )
     message = "script memory usage: ".. memory .. "kb"
@@ -87,45 +88,107 @@ end
 
 
 function playerInput()
-    -- arrow key movement
-    if IsKeyDown(keyboard.uparrow) then
-        pos1.y = pos1.y - DeltaTime() * 200
+    local speed = 200
+    local moving_up = false
+    local moving_down = false
+    local moving_left = false
+    local moving_right = false
+  
+    if IsKeyDown(input.keyboard.uparrow) then
+      if not moving_up then
+        pos1.y = pos1.y - DeltaTime() * speed
+        moving_up = true
+      end
+    else
+      moving_up = false
     end
-    if IsKeyDown(keyboard.downarrow) then
-        pos1.y = pos1.y + DeltaTime() * 200
+  
+    if IsKeyDown(input.keyboard.downarrow) then
+      if not moving_down then
+        pos1.y = pos1.y + DeltaTime() * speed
+        moving_down = true
+      end
+    else
+      moving_down = false
     end
-    if IsKeyDown(keyboard.rightarrow) then
-        pos1.x = pos1.x + DeltaTime() * 200
+  
+    if IsKeyDown(input.keyboard.rightarrow) then
+      if not moving_right then
+        pos1.x = pos1.x + DeltaTime() * speed
+        moving_right = true
+      end
+    else
+      moving_right = false
     end
-    if IsKeyDown(keyboard.leftarrow) then
-        pos1.x = pos1.x - DeltaTime() * 200
+  
+    if IsKeyDown(input.keyboard.leftarrow) then
+      if not moving_left then
+        pos1.x = pos1.x - DeltaTime() * speed
+        moving_left = true
+      end
+    else
+      moving_left = false
     end
 
-    -- WASD movement
-    if IsKeyDown(keyboard.w) then
-        pos1.y = pos1.y - DeltaTime() * 200
-    end
-    if IsKeyDown(keyboard.s) then
-        pos1.y = pos1.y + DeltaTime() * 200
-    end
-    if IsKeyDown(keyboard.d) then
-        pos1.x = pos1.x + DeltaTime() * 200
-    end
-    if IsKeyDown(keyboard.a) then
-        pos1.x = pos1.x - DeltaTime() * 200
-    end
-end
+    -- WASD
+    if IsKeyDown(input.keyboard.w) then
+        if not moving_up then
+          pos1.y = pos1.y - DeltaTime() * speed
+          moving_up = true
+        end
+      else
+        moving_up = false
+      end
+    
+      if IsKeyDown(input.keyboard.s) then
+        if not moving_down then
+          pos1.y = pos1.y + DeltaTime() * speed
+          moving_down = true
+        end
+      else
+        moving_down = false
+      end
+    
+      if IsKeyDown(input.keyboard.d) then
+        if not moving_right then
+          pos1.x = pos1.x + DeltaTime() * speed
+          moving_right = true
+        end
+      else
+        moving_right = false
+      end
+    
+      if IsKeyDown(input.keyboard.a) then
+        if not moving_left then
+          pos1.x = pos1.x - DeltaTime() * speed
+          moving_left = true
+        end
+      else
+        moving_left = false
+      end
+
+  end
+  
 
 while not WinShouldClose() do
     begin()
+        cls(0, 0, 0) -- clear the screen, with a certain color
+        DrawImage(sprite, 200, 100)
+
+        -- calling the mousePos() function and storing it in a variable in the begin() and stop()
+        -- will update the mouse position every frame update, but also causes a memory leak
+        -- the Lua garbage collector will clean unused crap from RAM, after it exceeds
+        -- 90kb or so, but this causes the CPU/GPU to work harder than it should (performance issue)
+        --mousepos = GetMousePos()
+
+
         -- draw the player (rectangle/square)
         DrawRect(pos1.x, pos1.y, 30, 30,
         67, 0.50, 0.50)
+
         playerInput()
 
-        cls(0, 0, 0) -- clear the screen, with a certain color
         displayInfo()
-        glitchyRectangle()
     stop()
 end
 

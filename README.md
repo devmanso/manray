@@ -11,7 +11,7 @@ To build a binary and run this, open your terminal and cd or navigate to whereve
 
 Next, enter 'make game' - this will produce the binary, given that there are no errors in your code.
 
-Finally, to run the binary, enter './main'
+Finally, to run the binary, enter './manray'
 
 This project is liscensed under the MIT Liscense (see LICENSE.md)
 
