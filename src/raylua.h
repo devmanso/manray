@@ -9,7 +9,26 @@
 
 // binding C functions to Lua
 
-int lua_iskeydown(lua_State *L) {
+static int lua_loadtexture(lua_State *L) {
+    const char *filename = luaL_checkstring(L, 1);
+    Texture2D *texture = malloc(sizeof(Texture2D));
+    *texture = LoadTexture(filename);
+    lua_pushlightuserdata(L, texture);
+    return 1;
+}
+
+static int lua_drawtexture(lua_State *L) {
+    Texture2D *texture = lua_touserdata(L, 1);
+    float xPosition = luaL_checknumber(L, 2);
+    float yPosition = luaL_checknumber(L, 3);
+    
+    //TODO: let lua scripter determine the tint of the texture
+    
+    DrawTexture(*texture, xPosition, yPosition, WHITE);
+    return 0;
+}
+
+static int lua_iskeydown(lua_State *L) {
     int key = luaL_checkinteger(L, 1);
     bool result = IsKeyDown(key);
     lua_pushboolean(L, result);
@@ -128,6 +147,8 @@ void registerBindings(lua_State *L) {
     lua_register(L, "WinShouldClose", lua_windowshouldclose);
     lua_register(L, "exit", lua_closewindow);
     lua_register(L, "getfps", lua_getfps);
+    lua_register(L, "LoadImage", lua_loadtexture);
+    lua_register(L, "DrawImage", lua_drawtexture);
 }
 
 /**

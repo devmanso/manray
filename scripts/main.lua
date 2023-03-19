@@ -11,6 +11,8 @@ pos3 = vec2.new(pos1.x + pos2.x, pos1.y + pos2.y)
 -- set target framerate
 setfps(60)
 
+sprite = LoadImage("scripts/art/images.png")
+
 function glitchyRectangle()
     -- stress testing the engine
     -- this rectangle will 'fidget' and appear 'glitchy' when displayed onto the screen
@@ -62,6 +64,7 @@ function glitchyRectangle()
 end
 
 function displayInfo()
+    DrawImage(sprite, 200, 100)
     -- display memory usage
     memory = tostring(math.floor(collectgarbage('count') ) )
     message = "script memory usage: ".. memory .. "kb"
@@ -73,7 +76,7 @@ function displayInfo()
     67, 0.50, 0.50)
 
     -- display text to the screen
-    DrawText("Hello world!", 200, 200, 20, 
+    DrawText("Hello world!", 210, 200, 20, 
     67, 0.90, 0.86)
 
     -- display time elapsed since last frame update
