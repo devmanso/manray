@@ -50,8 +50,13 @@ function vector2.new(x, y)
   return vector2_mt.__call(vector2_mt, x, y)
 end
 
--- Define the zero constant for the Vector2 object
+-- Define vector2 consts
 vector2.zero = vector2.new(0, 0)
+vector2.up = vector2.new(0, -1)
+vector2.down = vector2.new(0, 1)
+vector2.right = vector2.new(1, 0)
+vector2.left = vector2.new(-1, 0)
+
 
 -- Export the module table
 return vector2
