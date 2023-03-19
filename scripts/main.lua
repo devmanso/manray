@@ -11,7 +11,7 @@ pos2 = vec2.new(20, 10)
 pos3 = vec2.new(pos1.x + pos2.x, pos1.y + pos2.y)
 
 -- set target framerate
-setfps(60)
+setfps(0)
 
 sprite = LoadImage("scripts/art/images.png")
 
@@ -64,6 +64,40 @@ function glitchyRectangle()
     math.random(1, 360), math.random(0, 1), math.random(0, 1))
     
 end
+
+function stressTest()
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()    
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()
+    
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()
+
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()
+    glitchyRectangle()
+end
+
 
 function displayInfo()
     -- display memory usage
@@ -167,13 +201,14 @@ function playerInput()
         moving_left = false
       end
 
-  end
+end
   
 
 while not WinShouldClose() do
     begin()
         cls(0, 0, 0) -- clear the screen, with a certain color
         DrawImage(sprite, 200, 100)
+        stressTest()
 
         -- calling the mousePos() function and storing it in a variable in the begin() and stop()
         -- will update the mouse position every frame update, but also causes a memory leak
