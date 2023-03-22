@@ -15,6 +15,36 @@ static int lua_ismousebuttonpressed(lua_State *L) {
     return 1;
 }
 
+static int lua_getmonitorwidth(lua_State *L) {
+    int monitor = luaL_checknumber(L, 1);
+    int monitorWidth = GetMonitorWidth(monitor);
+    lua_pushnumber(L, monitorWidth);
+    return 1;
+}
+
+static int lua_getmonitorheight(lua_State *L) {
+    int monitor = luaL_checknumber(L, 1);
+    int monitorHeight = GetMonitorHeight(monitor);
+    lua_pushnumber(L, monitorHeight);
+    return 1;
+}
+
+static int lua_showcursor(lua_State *L) {
+    ShowCursor();
+    return 0;
+} 
+
+static int lua_hidecursor(lua_State *L) {
+    HideCursor();
+    return 0;
+}
+
+static int lua_iscursoronscreen(lua_State *L) {
+    bool isCursorOnScreen = IsCursorOnScreen();
+    lua_pushboolean(L, isCursorOnScreen);
+    return 1;
+}
+
 static int lua_getmouseposition(lua_State *L) {
     // using lua_pushnumber to push GetMousePosition will cause an error because Vector2
     // is incompatible with the type lua_Number, instead, we will create a table
@@ -88,7 +118,6 @@ static int lua_drawtext(lua_State *L) {
     value);
 
     DrawText(text, x, y, fontsize, color);
-
     return 0;
 }
 
@@ -179,6 +208,11 @@ void registerBindings(lua_State *L) {
     lua_register(L, "LoadImage", lua_loadtexture);
     lua_register(L, "DrawImage", lua_drawtexture);
     lua_register(L, "GetMousePos", lua_getmouseposition);
+    lua_register(L, "GetMonitorHeight", lua_getmonitorheight);
+    lua_register(L, "GetMonitorWidth", lua_getmonitorwidth);
+    lua_register(L, "ShowCursor", lua_showcursor);
+    lua_register(L, "HideCursor", lua_hidecursor);
+    lua_register(L, "IsCursorOnScreen", lua_iscursoronscreen);
 }
 
 /**
