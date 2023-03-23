@@ -27,7 +27,7 @@ To create an app bundle first create these directories:
 
 
 Now that you have created the app bundle directories, you will need to move your sounds, scripts, images etc.. into the app bundle:
-- in NAME.app/Contents/MacOS, copy-paste the "main" UNIX executable file into the directory, "main" is the engine that interprets your Lua scripts
+- in NAME.app/Contents/MacOS, copy-paste the "manray" UNIX executable file into the directory, "main" is the engine that interprets your Lua scripts
 - in NAME.app/Contents/MacOS/scripts, copy-paste all of your Lua script into this directory, as the engine will look for the main.lua script and execute it
 - in NAME.app/Contents, create an "info.plist" file, then insert this text:
 
@@ -60,3 +60,29 @@ Now that you have created the app bundle directories, you will need to move your
 you can modify the plist to your liking, as it doesn't change how the application runs, if you have an icon for your app, put the .icns image into Resources and call it in the plist.
 
 After you've done all that, your app is now complete! To run the app, double click the app icon.
+
+# Performance/Metrics:
+
+## Bench-test specs:
+### OS:
+- OSX Big Sur 11.7.1
+
+### CPU: i5-4260U
+- 2 cores, 4 threads
+- 1.4 ghz base, upto 2.7 ghz turbo
+- 3mb shared L3 cache
+
+### Processor graphics: Intel HD Graphics 5000
+- 200 mhz base
+- 1.0 ghz max dynamic
+- 2.0 gb max memory
+- DirectX 11.2/12
+- OpenGL 4.3
+
+## Benchmarks:
+
+### Rectangle Drawing stress test
+- 3920 rectangles drawn per draw iteration, the rectangles are drawn with random HSV values, and random positions, the rectangles are later cleared from the screen at the end of the iteration
+- reliable 60-80 fps while charging
+- 40-60 fps off charge (40% and above)
+- 20-40 fps off charge (low-battery)
