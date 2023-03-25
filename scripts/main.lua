@@ -6,8 +6,6 @@
 
 init(GetMonitorWidth(0), GetMonitorHeight(0), "my title")
 
---collectgarbage('stop')
-
 vec2 = require("scripts/vector2")
 kb = require("scripts/input")
 
@@ -20,229 +18,6 @@ pos3 = vec2.new(pos1.x + pos2.x, pos1.y + pos2.y)
 setfps(150)
 
 sprite = LoadImage("scripts/art/images.png")
-
-function glitchyRectangle()
-    -- stress testing the engine
-    -- this rectangle will 'fidget' and appear 'glitchy' when displayed onto the screen
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    DrawRect(math.random(0, GetMonitorWidth(0)), math.random(0, GetMonitorHeight(0)), math.random(50, 60), 120, 
-    math.random(1, 360), math.random(0, 1), math.random(0, 1))
-    
-    -- 70 rectangles drawn per call
-    drawOps = drawOps + 70
-end
-
-function stressTest()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()    
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-    glitchyRectangle()
-end
-
 
 function displayInfo()
     -- display memory usage
@@ -352,13 +127,12 @@ function playerInput()
       end
 
 end
-  
+
 
 while not WinShouldClose() do
+  mousepos = GetMousePos()
     begin()
-        start = os.clock()
         cls(0, 0, 0) -- clear the screen, with a certain color
-        stressTest()
         
         -- calling the mousePos() function and storing it in a variable in the begin() and stop()
         -- will update the mouse position every frame update, but also causes a memory leak
@@ -366,20 +140,14 @@ while not WinShouldClose() do
         -- 90kb or so, but this causes the CPU/GPU to work harder than it should (performance issue)
         --mousepos = GetMousePos()
 
-
         -- draw the player (rectangle/square)
         DrawImage(sprite, pos1.x, pos1.y)
 
         playerInput()
 
         displayInfo()
-        stoptime = os.clock()
-        elapsed = stoptime - start
-        DrawText(tostring(drawOps).. " rectangle draw ops done in :".. tostring(elapsed).. " seconds",
-        50, 80, 20,
-        265, 0.01, 0.99)
-        drawOps = 0
     stop()
+    
 end
 
 exit()

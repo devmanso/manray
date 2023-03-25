@@ -50,20 +50,27 @@ static int lua_getmouseposition(lua_State *L) {
     // is incompatible with the type lua_Number, instead, we will create a table
     // and store the x and y position on that table.
 
-    Vector2 mousePosition = GetMousePosition();
+    Vector2 *mousePosition = malloc(sizeof(Vector2));
 
-    // create lua table to hold x and y position
+    if (mousePosition == NULL) {
+        return luaL_error(L, " GetMousePos error: out of memory \n");
+    }
+
+    *mousePosition = GetMousePosition();
+
     lua_newtable(L);
 
-    // set x field to get x position of mouse
+    // push x value to the table
     lua_pushstring(L, "x");
-    lua_pushnumber(L, mousePosition.x);
+    lua_pushnumber(L, mousePosition->x);
     lua_settable(L, -3);
 
-    // set y field to get y position of mouse
+    // push y value to the table
     lua_pushstring(L, "y");
-    lua_pushnumber(L, mousePosition.y);
+    lua_pushnumber(L, mousePosition->y);
     lua_settable(L, -3);
+
+    free(mousePosition);
 
     return 1;
 }
