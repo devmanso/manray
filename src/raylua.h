@@ -84,6 +84,12 @@ static int lua_loadtexture(lua_State *L) {
     return 1;
 }
 
+static int lua_openurl(lua_State *L) {
+    const char *url = luaL_checkstring(L, 1);
+    OpenURL(url);
+    return 0;
+}
+
 static int lua_drawtexture(lua_State *L) {
     Texture2D *texture = lua_touserdata(L, 1);
     float xPosition = luaL_checknumber(L, 2);
@@ -245,6 +251,7 @@ void registerBindings(lua_State *L) {
     lua_register(L, "IsKeyReleased", lua_iskeyreleased);
     lua_register(L, "IsKeyPressed", lua_iskeypressed);
     lua_register(L, "IsKeyUp", lua_iskeyup);
+    lua_register(L, "OpenURL", lua_openurl);
 }
 
 /**

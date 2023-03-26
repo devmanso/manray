@@ -56,7 +56,11 @@ function playerInput()
     if IsKeyDown(input.keyboard.i) then
       collectgarbage('collect')
     end
-  
+
+    if IsKeyDown(input.keyboard.o) then
+      OpenURL("http://google.com")
+    end
+    
     if IsKeyDown(input.keyboard.uparrow) then
       if not moving_up then
         pos1.y = pos1.y - DeltaTime() * speed
@@ -134,7 +138,6 @@ end
 
 
 while not WinShouldClose() do
-  --mousepos = GetMousePos()
     begin()
         cls(0, 0, 0) -- clear the screen, with a certain color
         
@@ -142,11 +145,11 @@ while not WinShouldClose() do
         -- will update the mouse position every frame update, but also causes a memory leak
         -- the Lua garbage collector will clean unused crap from RAM, after it exceeds
         -- 90kb or so, but this causes the CPU/GPU to work harder than it should (performance issue)
-        --mousepos = GetMousePos()
+        mousepos = GetMousePos()
 
         -- draw the player (rectangle/square)
         DrawImage(sprite, pos1.x, pos1.y)
-
+        
         playerInput()
 
         displayInfo()
