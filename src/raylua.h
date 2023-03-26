@@ -53,6 +53,7 @@ static int lua_getmouseposition(lua_State *L) {
     Vector2 *mousePosition = malloc(sizeof(Vector2));
 
     if (mousePosition == NULL) {
+        free(mousePosition);
         return luaL_error(L, " GetMousePos error: out of memory \n");
     }
 
@@ -92,6 +93,27 @@ static int lua_drawtexture(lua_State *L) {
 
     DrawTexture(*texture, xPosition, yPosition, WHITE);
     return 0;
+}
+
+static int lua_iskeyreleased(lua_State *L) {
+    int key = luaL_checkinteger(L, 1);
+    bool result = IsKeyReleased(key);
+    lua_pushboolean(L, result);
+    return 1;
+}
+
+static int lua_iskeypressed(lua_State *L) {
+    int key = luaL_checkinteger(L, 1);
+    bool result = IsKeyPressed(key);
+    lua_pushboolean(L, result);
+    return 1;
+}
+
+static int lua_iskeyup(lua_State *L) {
+    int key = luaL_checkinteger(L, 1);
+    bool result = IsKeyUp(key);
+    lua_pushboolean(L, result);
+    return 1;
 }
 
 static int lua_iskeydown(lua_State *L) {
@@ -220,6 +242,9 @@ void registerBindings(lua_State *L) {
     lua_register(L, "ShowCursor", lua_showcursor);
     lua_register(L, "HideCursor", lua_hidecursor);
     lua_register(L, "IsCursorOnScreen", lua_iscursoronscreen);
+    lua_register(L, "IsKeyReleased", lua_iskeyreleased);
+    lua_register(L, "IsKeyPressed", lua_iskeypressed);
+    lua_register(L, "IsKeyUp", lua_iskeyup);
 }
 
 /**

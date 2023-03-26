@@ -55,7 +55,7 @@ int main() {
     char *script_path = (char*)malloc(sizeof(char) * (strlen(executable_path) + strlen("/scripts/main.lua") + 1));
     sprintf(script_path, "%s/scripts/main.lua", executable_path);
     free(executable_path);
-    printf("script path: %s\n", script_path);
+    //printf("script path: %s\n", script_path);
 
     lua_State *L = luaL_newstate();
     

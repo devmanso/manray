@@ -52,6 +52,10 @@ function playerInput()
     local moving_down = false
     local moving_left = false
     local moving_right = false
+
+    if IsKeyDown(input.keyboard.i) then
+      collectgarbage('collect')
+    end
   
     if IsKeyDown(input.keyboard.uparrow) then
       if not moving_up then
@@ -130,7 +134,7 @@ end
 
 
 while not WinShouldClose() do
-  mousepos = GetMousePos()
+  --mousepos = GetMousePos()
     begin()
         cls(0, 0, 0) -- clear the screen, with a certain color
         
@@ -147,7 +151,6 @@ while not WinShouldClose() do
 
         displayInfo()
     stop()
-    
 end
 
 exit()
