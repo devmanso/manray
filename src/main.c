@@ -39,7 +39,7 @@ char *get_executable_path() {
     return executable_path;
 }
 
-int main() {
+int main(void) {
     char *executable_path = get_executable_path();
     if (executable_path == NULL) {
         fprintf(stderr, "Error: unable to get executable path\n");

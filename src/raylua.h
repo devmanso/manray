@@ -1,10 +1,11 @@
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 #include <raylib.h>
 #include <lua/lauxlib.h>
 #include <lua/lua.h>
 #include <lua/luaconf.h>
 #include <lua/lualib.h>
-#include <string.h>
 
 
 // binding C functions to Lua
@@ -50,10 +51,10 @@ static int lua_getmouseposition(lua_State *L) {
     // is incompatible with the type lua_Number, instead, we will create a table
     // and store the x and y position on that table.
 
-    Vector2 *mousePosition = malloc(sizeof(Vector2));
+    Vector2 *mousePosition = MemAlloc(sizeof(Vector2));
 
     if (mousePosition == NULL) {
-        free(mousePosition);
+        MemFree(mousePosition);
         return luaL_error(L, " GetMousePos error: out of memory \n");
     }
 
@@ -71,7 +72,7 @@ static int lua_getmouseposition(lua_State *L) {
     lua_pushnumber(L, mousePosition->y);
     lua_settable(L, -3);
 
-    free(mousePosition);
+    MemFree(mousePosition);
 
     return 1;
 }
@@ -98,6 +99,12 @@ static int lua_drawtexture(lua_State *L) {
     //TODO: let lua scripter determine the tint of the texture
 
     DrawTexture(*texture, xPosition, yPosition, WHITE);
+    return 0;
+}
+
+static int lua_setexitkey(lua_State *L) {
+    int key = luaL_checkinteger(L, 1);
+    SetExitKey(key);
     return 0;
 }
 
@@ -251,6 +258,7 @@ void registerBindings(lua_State *L) {
     lua_register(L, "IsKeyReleased", lua_iskeyreleased);
     lua_register(L, "IsKeyPressed", lua_iskeypressed);
     lua_register(L, "IsKeyUp", lua_iskeyup);
+    lua_register(L, "SetExitKey", lua_setexitkey);
     lua_register(L, "OpenURL", lua_openurl);
 }
 

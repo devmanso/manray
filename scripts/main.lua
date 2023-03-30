@@ -58,7 +58,7 @@ function playerInput()
     end
 
     if IsKeyDown(input.keyboard.o) then
-      OpenURL("http://google.com")
+      OpenURL("http://142.250.65.238")
     end
     
     if IsKeyDown(input.keyboard.uparrow) then
