@@ -10,11 +10,9 @@
 
 // binding C functions to Lua
 
-static int lua_ismousebuttonpressed(lua_State *L) {
-    int mouseButton = luaL_checknumber(L, 1);
-    lua_pushnumber(L, IsMouseButtonDown(mouseButton));
-    return 1;
-}
+///////////////////
+// MONITOR/SPEC FUNCTIONS
+///////////////////
 
 static int lua_getmonitorwidth(lua_State *L) {
     int monitor = luaL_checknumber(L, 1);
@@ -29,6 +27,10 @@ static int lua_getmonitorheight(lua_State *L) {
     lua_pushnumber(L, monitorHeight);
     return 1;
 }
+
+///////////////////
+// CURSOR FUNCTIONS
+///////////////////
 
 static int lua_showcursor(lua_State *L) {
     ShowCursor();
@@ -46,10 +48,23 @@ static int lua_iscursoronscreen(lua_State *L) {
     return 1;
 }
 
+///////////////////
+// MOUSE FUNCTIONS
+///////////////////
+
+static int lua_getmousex(lua_State *L) {
+    int mouseX = GetMouseX();
+    lua_pushinteger(L, mouseX);
+    return 1;
+}
+
+static int lua_getmousey(lua_State *L) {
+    int mouseY = GetMouseY();
+    lua_pushinteger(L, mouseY);
+    return 1;
+}
+
 static int lua_getmouseposition(lua_State *L) {
-    // using lua_pushnumber to push GetMousePosition will cause an error because Vector2
-    // is incompatible with the type lua_Number, instead, we will create a table
-    // and store the x and y position on that table.
 
     Vector2 *mousePosition = MemAlloc(sizeof(Vector2));
 
@@ -61,7 +76,6 @@ static int lua_getmouseposition(lua_State *L) {
     *mousePosition = GetMousePosition();
 
     lua_newtable(L);
-
     // push x value to the table
     lua_pushstring(L, "x");
     lua_pushnumber(L, mousePosition->x);
@@ -72,16 +86,16 @@ static int lua_getmouseposition(lua_State *L) {
     lua_pushnumber(L, mousePosition->y);
     lua_settable(L, -3);
 
+    lua_pop(L, -3);
+
     MemFree(mousePosition);
 
     return 1;
 }
 
-static int lua_loadtexture(lua_State *L) {
-    const char *filename = luaL_checkstring(L, 1);
-    Texture2D *texture = malloc(sizeof(Texture2D));
-    *texture = LoadTexture(filename);
-    lua_pushlightuserdata(L, texture);
+static int lua_ismousebuttonpressed(lua_State *L) {
+    int mouseButton = luaL_checknumber(L, 1);
+    lua_pushnumber(L, IsMouseButtonDown(mouseButton));
     return 1;
 }
 
@@ -91,16 +105,9 @@ static int lua_openurl(lua_State *L) {
     return 0;
 }
 
-static int lua_drawtexture(lua_State *L) {
-    Texture2D *texture = lua_touserdata(L, 1);
-    float xPosition = luaL_checknumber(L, 2);
-    float yPosition = luaL_checknumber(L, 3);
-    
-    //TODO: let lua scripter determine the tint of the texture
-
-    DrawTexture(*texture, xPosition, yPosition, WHITE);
-    return 0;
-}
+///////////////////
+// KEYBOARD/INPUT FUNCTIONS
+///////////////////
 
 static int lua_setexitkey(lua_State *L) {
     int key = luaL_checkinteger(L, 1);
@@ -134,7 +141,11 @@ static int lua_iskeydown(lua_State *L) {
     bool result = IsKeyDown(key);
     lua_pushboolean(L, result);
     return 1;
- }
+}
+
+///////////////////
+// FRAME/FPS FUNCTIONS
+///////////////////
 
 static int lua_getfps(lua_State *L) {
     lua_pushnumber(L, GetFPS());
@@ -144,6 +155,60 @@ static int lua_getfps(lua_State *L) {
 static int lua_deltaTime(lua_State *L) {
     lua_pushnumber(L, GetFrameTime());
     return 1; // args to lua stack
+}
+
+///////////////////
+// DRAWING FUNCTIONS
+///////////////////
+
+static int lua_drawtexture(lua_State *L) {
+    Texture2D *texture = lua_touserdata(L, 1);
+    float xPosition = luaL_checknumber(L, 2);
+    float yPosition = luaL_checknumber(L, 3);
+    
+    //TODO: let lua scripter determine the tint of the texture
+
+    DrawTexture(*texture, xPosition, yPosition, WHITE);
+    return 0;
+}
+
+static int lua_clearbackground(lua_State *L) {
+    float hue = luaL_checknumber(L, 1);
+    float saturation = luaL_checknumber(L, 2);
+    float value = luaL_checknumber(L, 3);
+    Color color = ColorFromHSV(
+    hue, 
+    saturation, 
+    value);
+    ClearBackground(color);
+    return 0;
+}
+
+static int lua_setfps(lua_State *L) {
+    unsigned int fps = luaL_checkinteger(L, 1);
+    SetTargetFPS(fps);
+    return 0;
+}
+
+static int lua_windowshouldclose(lua_State *L) {
+    lua_pushboolean(L, WindowShouldClose());
+    return 1;
+}
+
+static int lua_initwindow(lua_State *L) {
+    int width = luaL_checkinteger(L, 1);
+    int height = luaL_checkinteger(L, 2);
+    const char *title = luaL_checkstring(L, 3);
+    InitWindow(width, height, title);
+    return 0;
+}
+
+static int lua_loadtexture(lua_State *L) {
+    const char *filename = luaL_checkstring(L, 1);
+    Texture2D *texture = malloc(sizeof(Texture2D));
+    *texture = LoadTexture(filename);
+    lua_pushlightuserdata(L, texture);
+    return 1;
 }
 
 static int lua_drawtext(lua_State *L) {
@@ -176,37 +241,6 @@ static int lua_drawrect(lua_State *L) {
     saturation, 
     value);
     DrawRectangle(xpos, ypos, width, height, color);
-    return 0;
-}
-
-static int lua_clearbackground(lua_State *L) {
-    float hue = luaL_checknumber(L, 1);
-    float saturation = luaL_checknumber(L, 2);
-    float value = luaL_checknumber(L, 3);
-    Color color = ColorFromHSV(
-    hue, 
-    saturation, 
-    value);
-    ClearBackground(color);
-    return 0;
-}
-
-static int lua_setfps(lua_State *L) {
-    unsigned int fps = luaL_checkinteger(L, 1);
-    SetTargetFPS(fps);
-    return 0;
-}
-
-static int lua_windowshouldclose(lua_State *L) {
-    lua_pushboolean(L, WindowShouldClose());
-    return 1;
-}
-
-static int lua_initwindow(lua_State *L) {
-    int width = luaL_checkinteger(L, 1);
-    int height = luaL_checkinteger(L, 2);
-    const char *title = luaL_checkstring(L, 3);
-    InitWindow(width, height, title);
     return 0;
 }
 
@@ -249,7 +283,7 @@ void registerBindings(lua_State *L) {
     lua_register(L, "getfps", lua_getfps);
     lua_register(L, "LoadImage", lua_loadtexture);
     lua_register(L, "DrawImage", lua_drawtexture);
-    lua_register(L, "GetMousePos", lua_getmouseposition);
+    lua_register(L, "GetMousePosition", lua_getmouseposition);
     lua_register(L, "GetMonitorHeight", lua_getmonitorheight);
     lua_register(L, "GetMonitorWidth", lua_getmonitorwidth);
     lua_register(L, "ShowCursor", lua_showcursor);
@@ -260,6 +294,8 @@ void registerBindings(lua_State *L) {
     lua_register(L, "IsKeyUp", lua_iskeyup);
     lua_register(L, "SetExitKey", lua_setexitkey);
     lua_register(L, "OpenURL", lua_openurl);
+    lua_register(L, "GetMouseX", lua_getmousex);
+    lua_register(L, "GetMouseY", lua_getmousey);
 }
 
 /**
