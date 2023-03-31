@@ -64,33 +64,18 @@ static int lua_getmousey(lua_State *L) {
     return 1;
 }
 
-static int lua_getmouseposition(lua_State *L) {
-
-    Vector2 *mousePosition = MemAlloc(sizeof(Vector2));
-
-    if (mousePosition == NULL) {
-        MemFree(mousePosition);
-        return luaL_error(L, " GetMousePos error: out of memory \n");
-    }
-
-    *mousePosition = GetMousePosition();
-
-    lua_newtable(L);
-    // push x value to the table
-    lua_pushstring(L, "x");
-    lua_pushnumber(L, mousePosition->x);
-    lua_settable(L, -3);
-
-    // push y value to the table
-    lua_pushstring(L, "y");
-    lua_pushnumber(L, mousePosition->y);
-    lua_settable(L, -3);
-
-    lua_pop(L, -3);
-
-    MemFree(mousePosition);
-
-    return 1;
+int lua_getmouseposition(lua_State *L) {
+  if (!lua_istable(L, 1)) {
+    lua_settop(L, 0);
+    lua_createtable(L, 0, 2);
+  }
+  lua_settop(L, 1);
+  Vector2 mousePosition = GetMousePosition();
+  lua_pushinteger(L, mousePosition.x);
+  lua_setfield(L, 1, "x");
+  lua_pushinteger(L, mousePosition.y);
+  lua_setfield(L, 1, "y");
+  return 1;
 }
 
 static int lua_ismousebuttonpressed(lua_State *L) {
