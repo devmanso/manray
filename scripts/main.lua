@@ -136,7 +136,7 @@ function playerInput()
 
 end
 
-
+--collectgarbage('collect')
 while not WinShouldClose() do
     begin()
         cls(0, 0, 0) -- clear the screen, with a certain color

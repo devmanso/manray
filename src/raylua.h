@@ -132,6 +132,12 @@ static int lua_iskeydown(lua_State *L) {
 // FRAME/FPS FUNCTIONS
 ///////////////////
 
+static int lua_setfps(lua_State *L) {
+    unsigned int fps = luaL_checkinteger(L, 1);
+    SetTargetFPS(fps);
+    return 0;
+}
+
 static int lua_getfps(lua_State *L) {
     lua_pushnumber(L, GetFPS());
     return 1;
@@ -166,12 +172,6 @@ static int lua_clearbackground(lua_State *L) {
     saturation, 
     value);
     ClearBackground(color);
-    return 0;
-}
-
-static int lua_setfps(lua_State *L) {
-    unsigned int fps = luaL_checkinteger(L, 1);
-    SetTargetFPS(fps);
     return 0;
 }
 
@@ -210,6 +210,39 @@ static int lua_drawtext(lua_State *L) {
     value);
 
     DrawText(text, x, y, fontsize, color);
+    return 0;
+}
+
+static int lua_drawline(lua_State *L) {
+    int startPositionX = luaL_checkinteger(L, 1);
+    int startPositionY = luaL_checkinteger(L, 2);
+    int endPositionX = luaL_checkinteger(L, 3);
+    int endPositionY = luaL_checkinteger(L, 4);
+
+    float hue = luaL_checknumber(L, 5);
+    float saturation = luaL_checknumber(L, 6);
+    float value = luaL_checknumber(L, 7);
+    Color color = ColorFromHSV(
+    hue, 
+    saturation, 
+    value);
+    DrawLine(startPositionX, startPositionY, endPositionX, endPositionY, color);
+    return 0;
+}
+
+static int lua_DrawPixel(lua_State *L) {
+    int positionX = luaL_checkinteger(L, 1);
+    int positionY = luaL_checkinteger(L, 2);
+
+    float hue = luaL_checknumber(L, 5);
+    float saturation = luaL_checknumber(L, 6);
+    float value = luaL_checknumber(L, 7);
+    Color color = ColorFromHSV(
+    hue, 
+    saturation, 
+    value);
+
+    DrawPixel(positionX, positionY, color);
     return 0;
 }
 
@@ -261,6 +294,7 @@ void registerBindings(lua_State *L) {
     lua_register(L, "DrawText", lua_drawtext);
     lua_register(L, "cls", lua_clearbackground);
     lua_register(L, "DrawRect", lua_drawrect);
+    lua_register(L, "DrawLine", lua_drawline);
     lua_register(L, "setfps", lua_setfps);
     lua_register(L, "DeltaTime", lua_deltaTime);
     lua_register(L, "WinShouldClose", lua_windowshouldclose);
