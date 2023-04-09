@@ -80,7 +80,7 @@ int lua_getmouseposition(lua_State *L) {
 
 static int lua_ismousebuttonpressed(lua_State *L) {
     int mouseButton = luaL_checknumber(L, 1);
-    lua_pushboolean(L, IsMouseButtonDown(mouseButton));
+    lua_pushboolean(L, IsMouseButtonPressed(mouseButton));
     return 1;
 }
 

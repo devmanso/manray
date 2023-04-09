@@ -136,12 +136,12 @@ function playerInput()
 
 end
 
-xpos = math.random(1, 1440)
-ypos = math.random(1, 900)
+xpos = math.random(1, 1340)
+ypos = math.random(1, 800)
 
 function calculatePositions()
-  xpos = math.random(1, 1440)
-  ypos = math.random(1, 900)
+  xpos = math.random(1, 1340)
+  ypos = math.random(1, 800)
 end
 
 --collectgarbage('collect')
@@ -150,10 +150,12 @@ while not WinShouldClose() do
         cls(0, 0, 0) -- clear the screen, with a certain color
 
         leftClick = IsMouseButtonPressed(input.mouse.left)
+        mousepos = GetMousePosition()
 
-        if leftClick == true then stop()
-          exit() 
-          os.exit()
+        if leftClick == true then
+          if mousepos.x <= xpos + 30 then
+            calculatePositions()
+          end
         end
 
         -- draw the player (rectangle/square)
