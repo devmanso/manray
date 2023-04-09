@@ -153,8 +153,11 @@ while not WinShouldClose() do
         mousepos = GetMousePosition()
 
         if leftClick == true then
-          if mousepos.x <= xpos + 30 then
-            calculatePositions()
+          if mousepos.x >= xpos + 40 then
+            if mousepos.x > xpos + 41 then end
+          end
+          if mousepos.y >= ypos + 40 then
+            if mousepos.y > ypos + 41 then end
           end
         end
 
