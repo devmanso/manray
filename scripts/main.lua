@@ -6,10 +6,9 @@
 
 init(GetMonitorWidth(0), GetMonitorHeight(0), "my title")
 
+HideCursor()
 vec2 = require("scripts/vector2")
 input = require("scripts/input")
-
-drawOps = 0
 pos1 = vec2.new(10, 40)
 pos2 = vec2.new(20, 10)
 pos3 = vec2.new(pos1.x + pos2.x, pos1.y + pos2.y)
@@ -24,10 +23,6 @@ function displayInfo()
     memory = tostring(math.floor(collectgarbage('count') ) )
     message = "script memory usage: ".. memory .. "kb"
     DrawText(message, 50, 40, 20, 
-    265, 0.01, 0.99)
-
-    mathOperations = "rectangle math operations done: " ..tostring(drawOps)
-    DrawText(mathOperations, 50, 60, 20, 
     265, 0.01, 0.99)
 
     -- display framerate
@@ -144,25 +139,23 @@ function calculatePositions()
   ypos = math.random(1, 800)
 end
 
+hue = 211
+sat = 0.74
+value = 0.89
+
 --collectgarbage('collect')
 while not WinShouldClose() do
     begin()
         cls(0, 0, 0) -- clear the screen, with a certain color
-
+        
         leftClick = IsMouseButtonPressed(input.mouse.left)
         mousepos = GetMousePosition()
 
-
-
-        -- draw the player (rectangle/square)
-        --DrawImage(sprite, pos1.x, pos1.y)
-
         DrawRect(xpos, ypos, 100, 100,
         295, 0, 1)
-        
-        --playerInput()
-        DrawRect(mousepos.x, mousepos.y, 10, 10,
-        211, 0.74, 0.89)
+
+        DrawRect(mousepos.x, mousepos.y, 100, 100,
+        hue, sat, value)
 
         if leftClick == true then
           if mousepos.x == xpos and mousepos.y == ypos then
@@ -170,8 +163,17 @@ while not WinShouldClose() do
           end
         end
 
+        if mousepos.x == xpos and mousepos.y == ypos  then
+          hue = 338
+          sat = 0.74
+          value = 0.89   
+        else 
+          hue = 211
+          sat = 0.74
+          value = 0.89
+        end
 
-        --displayInfo()
+        displayInfo()
     stop()
 end
 
