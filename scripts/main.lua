@@ -152,22 +152,24 @@ while not WinShouldClose() do
         leftClick = IsMouseButtonPressed(input.mouse.left)
         mousepos = GetMousePosition()
 
-        if leftClick == true then
-          if mousepos.x >= xpos + 40 then
-            if mousepos.x > xpos + 41 then end
-          end
-          if mousepos.y >= ypos + 40 then
-            if mousepos.y > ypos + 41 then end
-          end
-        end
+
 
         -- draw the player (rectangle/square)
         --DrawImage(sprite, pos1.x, pos1.y)
 
         DrawRect(xpos, ypos, 100, 100,
-                295, 0, 1)
+        295, 0, 1)
         
         --playerInput()
+        DrawRect(mousepos.x, mousepos.y, 10, 10,
+        211, 0.74, 0.89)
+
+        if leftClick == true then
+          if mousepos.x == xpos and mousepos.y == ypos then
+            calculatePositions()
+          end
+        end
+
 
         --displayInfo()
     stop()
