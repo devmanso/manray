@@ -80,25 +80,25 @@ int lua_getmouseposition(lua_State *L) {
 
 static int lua_ismousebuttonpressed(lua_State *L) {
     int mouseButton = luaL_checknumber(L, 1);
-    lua_pushnumber(L, IsMouseButtonDown(mouseButton));
+    lua_pushboolean(L, IsMouseButtonDown(mouseButton));
     return 1;
 }
 
 static int lua_ismousebuttonreleased(lua_State *L) {
     int mouseButton = luaL_checknumber(L, 1);
-    lua_pushnumber(L, IsMouseButtonReleased(mouseButton));
+    lua_pushboolean(L, IsMouseButtonReleased(mouseButton));
     return 1;
 }
 
 static int lua_ismousebuttonup(lua_State *L) {
     int mouseButton = luaL_checknumber(L, 1);
-    lua_pushnumber(L, IsMouseButtonUp(mouseButton));
+    lua_pushboolean(L, IsMouseButtonUp(mouseButton));
     return 1;
 }
 
 static int lua_ismousebuttondown(lua_State *L) {
     int mouseButton = luaL_checknumber(L, 1);
-    lua_pushnumber(L, IsMouseButtonDown(mouseButton));
+    lua_pushboolean(L, IsMouseButtonDown(mouseButton));
     return 1;
 }
 
@@ -248,7 +248,7 @@ static int lua_drawline(lua_State *L) {
     return 0;
 }
 
-static int lua_DrawPixel(lua_State *L) {
+static int lua_drawpixel(lua_State *L) {
     int positionX = luaL_checkinteger(L, 1);
     int positionY = luaL_checkinteger(L, 2);
 
@@ -337,6 +337,7 @@ void registerBindings(lua_State *L) {
     lua_register(L, "IsMouseButtonReleased", lua_ismousebuttonreleased);
     lua_register(L, "IsMouseButtonDown", lua_ismousebuttondown);
     lua_register(L, "IsMouseButtonUp", lua_ismousebuttonup);
+    lua_register(L, "DrawPixel", lua_drawpixel);
 }
 
 /**

@@ -7,7 +7,7 @@
 init(GetMonitorWidth(0), GetMonitorHeight(0), "my title")
 
 vec2 = require("scripts/vector2")
-kb = require("scripts/input")
+input = require("scripts/input")
 
 drawOps = 0
 pos1 = vec2.new(10, 40)
@@ -136,18 +136,35 @@ function playerInput()
 
 end
 
+xpos = math.random(1, 1440)
+ypos = math.random(1, 900)
+
+function calculatePositions()
+  xpos = math.random(1, 1440)
+  ypos = math.random(1, 900)
+end
+
 --collectgarbage('collect')
 while not WinShouldClose() do
     begin()
         cls(0, 0, 0) -- clear the screen, with a certain color
 
-        -- draw the player (rectangle/square)
-        DrawImage(sprite, pos1.x, pos1.y)
-        
-        playerInput()
+        leftClick = IsMouseButtonPressed(input.mouse.left)
 
-        displayInfo()
-        pos = nil
+        if leftClick == true then stop()
+          exit() 
+          os.exit()
+        end
+
+        -- draw the player (rectangle/square)
+        --DrawImage(sprite, pos1.x, pos1.y)
+
+        DrawRect(xpos, ypos, 100, 100,
+                295, 0, 1)
+        
+        --playerInput()
+
+        --displayInfo()
     stop()
 end
 
