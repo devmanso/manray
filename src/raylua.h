@@ -84,6 +84,24 @@ static int lua_ismousebuttonpressed(lua_State *L) {
     return 1;
 }
 
+static int lua_ismousebuttonreleased(lua_State *L) {
+    int mouseButton = luaL_checknumber(L, 1);
+    lua_pushnumber(L, IsMouseButtonReleased(mouseButton));
+    return 1;
+}
+
+static int lua_ismousebuttonup(lua_State *L) {
+    int mouseButton = luaL_checknumber(L, 1);
+    lua_pushnumber(L, IsMouseButtonUp(mouseButton));
+    return 1;
+}
+
+static int lua_ismousebuttondown(lua_State *L) {
+    int mouseButton = luaL_checknumber(L, 1);
+    lua_pushnumber(L, IsMouseButtonDown(mouseButton));
+    return 1;
+}
+
 static int lua_openurl(lua_State *L) {
     const char *url = luaL_checkstring(L, 1);
     OpenURL(url);
@@ -315,6 +333,10 @@ void registerBindings(lua_State *L) {
     lua_register(L, "OpenURL", lua_openurl);
     lua_register(L, "GetMouseX", lua_getmousex);
     lua_register(L, "GetMouseY", lua_getmousey);
+    lua_register(L, "IsMouseButtonPressed", lua_ismousebuttonpressed);
+    lua_register(L, "IsMouseButtonReleased", lua_ismousebuttonreleased);
+    lua_register(L, "IsMouseButtonDown", lua_ismousebuttondown);
+    lua_register(L, "IsMouseButtonUp", lua_ismousebuttonup);
 }
 
 /**
