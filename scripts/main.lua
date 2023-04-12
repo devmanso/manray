@@ -16,8 +16,6 @@ pos3 = vec2.new(pos1.x + pos2.x, pos1.y + pos2.y)
 -- set target framerate
 setfps(150)
 
-sprite = LoadImage("scripts/art/images.png")
-
 function displayInfo()
     -- display memory usage
     memory = tostring(math.floor(collectgarbage('count') ) )
@@ -167,7 +165,7 @@ while not WinShouldClose() do
           hue = 338
           sat = 0.74
           value = 0.89   
-        else 
+        else
           hue = 211
           sat = 0.74
           value = 0.89

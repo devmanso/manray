@@ -28,6 +28,21 @@ static int lua_getmonitorheight(lua_State *L) {
     return 1;
 }
 
+static int lua_togglefullscreen(lua_State *L) {
+    ToggleFullscreen();
+    return 0;
+}
+
+///////////////////
+// FILESYSTEM
+///////////////////
+
+static int lua_fileexists(lua_State *L) {
+    const char filename = luaL_checkstring(L, 1);
+    FileExists(filename);
+    return 1;
+}
+
 ///////////////////
 // CURSOR FUNCTIONS
 ///////////////////
@@ -338,6 +353,7 @@ void registerBindings(lua_State *L) {
     lua_register(L, "IsMouseButtonDown", lua_ismousebuttondown);
     lua_register(L, "IsMouseButtonUp", lua_ismousebuttonup);
     lua_register(L, "DrawPixel", lua_drawpixel);
+    lua_register(L, "ToggleFullscreen", lua_togglefullscreen);
 }
 
 /**
