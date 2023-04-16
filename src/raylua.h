@@ -38,8 +38,16 @@ static int lua_togglefullscreen(lua_State *L) {
 ///////////////////
 
 static int lua_fileexists(lua_State *L) {
-    const char filename = luaL_checkstring(L, 1);
-    FileExists(filename);
+    const char *filename = luaL_checkstring(L, 1);
+    bool fileExists = FileExists(filename);
+    lua_pushboolean(L, fileExists);
+    return 1;
+}
+
+static int lua_directoryexists(lua_State *L) {
+    const char *directory = luaL_checkstring(L, 1);
+    bool directoryExists = DirectoryExists(directory);
+    lua_pushboolean(L, directoryExists);
     return 1;
 }
 
@@ -354,6 +362,8 @@ void registerBindings(lua_State *L) {
     lua_register(L, "IsMouseButtonUp", lua_ismousebuttonup);
     lua_register(L, "DrawPixel", lua_drawpixel);
     lua_register(L, "ToggleFullscreen", lua_togglefullscreen);
+    lua_register(L, "FileExists", lua_fileexists);
+    lua_register(L, "DirectoryExists", lua_directoryexists);
 }
 
 /**
